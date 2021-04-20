@@ -1,5 +1,7 @@
 <template>
-  <jet-authentication-card>
+  <jet-authentication-card
+    class="flex flex-col items-center justify-center min-h-screen p-4"
+  >
     <div class="fixed top-0 right-0 hidden px-6 py-4 sm:block">
       <inertia-link
         v-if="$page.props.user"
@@ -23,7 +25,7 @@
       <div class="flex items-center space-x-4">
         <jet-authentication-card-logo />
 
-        <div class="text-4xl">Voting System</div>
+        <div class="text-4xl text-gray-600">Voting System</div>
       </div>
     </template>
     <jet-validation-errors class="mb-4" />
@@ -57,14 +59,11 @@
         />
       </div>
 
-      <div class="block mt-4">
+      <div class="flex justify-between mt-4">
         <label class="flex items-center">
           <jet-checkbox name="remember" v-model:checked="form.remember" />
           <span class="ml-2 text-sm text-gray-600">Remember me</span>
         </label>
-      </div>
-
-      <div class="flex items-center justify-end mt-4">
         <inertia-link
           v-if="canResetPassword"
           :href="route('password.request')"
@@ -72,14 +71,31 @@
         >
           Forgot your password?
         </inertia-link>
+      </div>
 
-        <jet-button
-          class="ml-4"
+      <div class="flex justify-between mt-4 space-x-3">
+        <inertia-link
+          as="button"
+          v-if="canRegister"
+          :href="route('register')"
+          class="w-1/2 text-sm text-center text-gray-700 btn btn-outline-success"
+        >
+          Register
+        </inertia-link>
+        <button
+          class="w-1/2 btn btn-primary"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
           Log in
-        </jet-button>
+        </button>
+        <!-- <jet-button
+          class="ml-2"
+          :class="{ 'opacity-25': form.processing }"
+          :disabled="form.processing"
+        >
+          Log in
+        </jet-button> -->
       </div>
     </form>
   </jet-authentication-card>

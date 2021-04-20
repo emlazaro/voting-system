@@ -12,13 +12,28 @@
       </div>
     </template>
 
-    <div class="py-10">
+    <div class="py-5">
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <!-- FLASH ALERT -->
+        <div
+          v-if="this.$page.props.success || this.$page.props.error"
+          :class="this.$page.props.success ? `bg-green-500` : `bg-red-500`"
+          class="flex items-center justify-between px-4 py-2 font-semibold text-white rounded-md"
+        >
+          {{ this.$page.props.success }}
+          <button
+            class="focus:outline-none hover:text-gray-500"
+            type="button"
+            @click="this.$page.props.success = null"
+          >
+            <icon name="close" />
+          </button>
+        </div>
         <div
           class="flex flex-col items-start justify-between w-full p-4 space-y-4 md:p-0"
         >
           <!-- TABLE -->
-          <div class="w-full mt-4 overflow-y-auto rounded-md shadow">
+          <div class="w-full overflow-y-auto rounded-md shadow">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>

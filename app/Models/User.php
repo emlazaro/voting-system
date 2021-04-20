@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Nominee::class, 'user_id', 'id');
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'voter_id', 'id');
+    }
 }

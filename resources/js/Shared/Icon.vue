@@ -71,7 +71,7 @@
     v-else-if="name === 'edit'"
     xmlns="http://www.w3.org/2000/svg"
     class="w-5 h-5"
-    viewBox="0 0 20 20"
+    viewBox="0 0 24 24"
     fill="currentColor"
   >
     <path
@@ -83,7 +83,7 @@
     v-else-if="name === 'delete'"
     xmlns="http://www.w3.org/2000/svg"
     class="w-5 h-5"
-    viewBox="0 0 20 20"
+    viewBox="0 0 24 24"
     fill="currentColor"
   >
     <path
@@ -97,7 +97,7 @@
     v-else-if="name === 'directory'"
     xmlns="http://www.w3.org/2000/svg"
     class="w-5 h-5"
-    viewBox="0 0 20 20"
+    viewBox="0 0 24 24"
     fill="currentColor"
   >
     <path
@@ -108,9 +108,9 @@
   <svg
     v-else-if="name === 'close'"
     xmlns="http://www.w3.org/2000/svg"
-    class="w-6 h-6"
+    class="w-5 h-5"
     fill="none"
-    viewBox="0 0 20 20"
+    viewBox="0 0 24 24"
     stroke="currentColor"
   >
     <path
@@ -435,6 +435,19 @@ c-187 -234 -414 -410 -740 -576 -135 -68 -139 -69 -112 -37 89 109 192 256
 246 349 51 90 139 275 163 343 6 15 25 17 219 16 117 0 230 -3 251 -7z"
       />
     </g>
+  </svg>
+  <svg
+    v-else-if="name === 'back'"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+      clip-rule="evenodd"
+    />
   </svg>
 </template>
 

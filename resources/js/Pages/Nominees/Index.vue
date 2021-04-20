@@ -14,14 +14,14 @@
       </div>
     </template>
 
-    <div class="py-10">
+    <div class="py-5">
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex flex-col items-start justify-between w-full space-y-4">
           <div
             class="flex flex-col items-start justify-between w-full p-4 space-y-4 md:p-0"
           >
             <!-- TABLE -->
-            <div class="w-full mt-4 overflow-y-auto rounded-md shadow">
+            <div class="w-full overflow-y-auto rounded-md shadow">
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>

@@ -75,23 +75,18 @@ class COOPDBSeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'President',
+            'name' => 'Board of Directors',
             'max_selection' => 1,
         ]);
 
         Category::create([
-            'name' => 'Vice President',
+            'name' => 'Audit and Inventory Committee',
             'max_selection' => 1,
         ]);
 
         Category::create([
-            'name' => 'Secretary',
+            'name' => 'Election Committee',
             'max_selection' => 1,
-        ]);
-
-        Category::create([
-            'name' => 'Officers',
-            'max_selection' => 2,
         ]);
 
         Nominee::create([
@@ -117,6 +112,11 @@ class COOPDBSeeder extends Seeder
         Nominee::create([
             'category_id' => 2,
             'user_id' => 5
+        ]);
+
+        Nominee::create([
+            'category_id' => 3,
+            'user_id' => 6
         ]);
 
         // Vote::create([

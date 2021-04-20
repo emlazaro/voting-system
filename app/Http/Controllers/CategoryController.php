@@ -62,7 +62,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        Nominee::where('category_id', $category->id)->delete();
+        $category->nominees()->delete();
         $category->delete();
 
         return redirect()->route('categories')->with(['success' => 'Category data has been deleted']);

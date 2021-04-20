@@ -64,6 +64,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/nominees/{nominee}', [NomineeController::class, 'destroy'])->name('nominees.destroy');
 
     //Votes
+    Route::get('/votes/results', [VotesController::class, 'show'])->name('results');
     Route::get('/votes', [VotesController::class, 'index'])->name('votes');
     Route::post('/votes', [VotesController::class, 'store'])->name('votes.store');
 });

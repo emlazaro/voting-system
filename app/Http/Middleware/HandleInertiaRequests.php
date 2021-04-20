@@ -40,8 +40,7 @@ class HandleInertiaRequests extends Middleware
             // 'auth.user' => fn () => $request->user()
             //     ? $request->user()->only('id', 'name', 'email', 'role')
             //     : null,
-            // 'success' => session('success'),
-            // 'error' => session('errors')
+            'success' => session('success'),
         ]);
     }
 }

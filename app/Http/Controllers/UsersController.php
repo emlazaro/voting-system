@@ -69,7 +69,8 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        $user->nominee()->delete();
+        $user->votes()->delete();
+        $user->nomination()->delete();
         $user->delete();
 
         return redirect()->route('users')->with(['success' => 'User data has been deleted']);

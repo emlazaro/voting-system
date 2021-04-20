@@ -5,38 +5,53 @@
         Dashboard
       </h2>
     </template>
-
-    <div class="py-10">
+    <div class="py-5">
       <div class="flex flex-col mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+        <!-- MAIN CONTENT -->
         <div
           class="flex flex-col flex-wrap items-start justify-between w-full p-4 space-y-3 md:flex-nowrap md:p-0 md:flex-row md:space-x-4 md:space-y-0"
         >
           <div class="w-full p-4 bg-white rounded shadow">
             <div class="mb-2">Voters</div>
             <hr />
-            <div class="text-xl font-semibold">{{ Users.length }}</div>
+            <div class="text-2xl font-semibold">{{ Users.length }}</div>
           </div>
           <div class="w-full p-4 bg-white rounded shadow">
             <div class="mb-2">Voted</div>
             <hr />
-            <div class="text-xl font-semibold">{{ Votes }}</div>
+            <div class="text-2xl font-semibold">{{ Votes }}</div>
           </div>
           <div class="w-full p-4 bg-white rounded shadow">
             <div class="mb-2">Categories</div>
             <hr />
-            <div class="text-xl font-semibold">{{ Categories.length }}</div>
+            <div class="text-2xl font-semibold">{{ Categories.length }}</div>
           </div>
           <div class="w-full p-4 bg-white rounded shadow">
             <div class="mb-2">Nominees</div>
             <hr />
-            <div class="text-xl font-semibold">{{ Nominees.length }}</div>
+            <div class="text-2xl font-semibold">{{ Nominees.length }}</div>
           </div>
         </div>
+        <!-- RESULTS OVERVIEW -->
         <div
           v-if="this.$page.props.user.role === 'admin'"
           class="flex flex-col items-center justify-center w-full p-4 space-y-6 md:p-0"
         >
-          <div class="text-2xl font-semibold">Results</div>
+          <div class="flex items-center justify-between w-full">
+            <div class="text-2xl font-semibold">
+              Election Update
+              <span class="text-xs"> as of {{ today }} today...</span>
+            </div>
+            <div>
+              <inertia-link
+                class="text-sm shadow btn btn-outline-primary"
+                as="button"
+                :href="route('results')"
+              >
+                Download Results
+              </inertia-link>
+            </div>
+          </div>
           <!-- <div class="w-full p-4 bg-white rounded shadow-md">Table</div> -->
           <!-- TABLE -->
           <div class="w-full mt-4 overflow-y-auto rounded-md shadow">
@@ -57,7 +72,7 @@
                   </th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-xs font-semibold tracking-wider text-left text-gray-500 uppercase"
+                    class="px-6 py-3 text-xs font-semibold tracking-wider text-center text-gray-500 uppercase"
                   >
                     Votes
                   </th>
@@ -87,7 +102,7 @@
                     </ul>
                   </td>
                   <td
-                    class="px-6 py-4 text-sm text-left text-gray-500 whitespace-nowrap"
+                    class="px-6 py-4 text-sm text-center text-gray-500 whitespace-nowrap"
                   >
                     <ul>
                       <li
@@ -127,7 +142,11 @@ export default {
   },
   data() {
     return {
-      today: new Date().toLocaleDateString(),
+      today: new Date().toLocaleString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }),
     };
   },
 };

@@ -1,7 +1,6 @@
 <template>
   <div>
     <jet-banner />
-
     <div class="min-h-screen bg-gray-100">
       <nav class="bg-white border-b border-gray-100">
         <!-- Primary Navigation Menu -->
@@ -38,6 +37,7 @@
                   Categories
                 </jet-nav-link>
                 <jet-nav-link
+                  v-if="this.$page.props.user.role === 'admin'"
                   :href="route('nominees')"
                   :active="route().current('nominees')"
                 >
@@ -413,11 +413,14 @@
           <slot name="header"></slot>
         </div>
       </header>
-
       <!-- Page Content -->
       <main>
         <slot></slot>
       </main>
+
+      <footer class="fixed bottom-2 left-2">
+        <div class="text-xs text-gray-300">Developed by POEA - ICT © 2021</div>
+      </footer>
     </div>
   </div>
 </template>
