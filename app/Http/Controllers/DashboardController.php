@@ -15,9 +15,9 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard', [
             'Users' => User::all(),
-            'Votes' => Vote::with('user')->distinct()->count('user_id'),
-            'Categories' => Category::with('nominees')->get(),
-            'Nominees' => Nominee::all()
+            'Votes' => Vote::with('user')->distinct()->count('voter_id'),
+            'Categories' => Category::with('nominees.user', 'nominees.votes')->get(),
+            'Nominees' => Nominee::all(),
         ]);
     }
 }

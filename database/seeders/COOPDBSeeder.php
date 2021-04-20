@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Nominee;
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Vote;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class COOPDBSeeder extends Seeder
@@ -28,7 +29,6 @@ class COOPDBSeeder extends Seeder
             'name' => 'Ricky Capin',
             'email' => 'rcapin@poea.gov.ph',
             'password' => Hash::make('admin123'),
-            'nominee_id' => 1,
             'role' => 'admin'
         ]);
 
@@ -36,7 +36,6 @@ class COOPDBSeeder extends Seeder
             'name' => 'Jeri Barinaga',
             'email' => 'jbarinaga@poea.gov.ph',
             'password' => Hash::make('admin123'),
-            'nominee_id' => 2,
             'role' => 'admin'
         ]);
 
@@ -44,7 +43,6 @@ class COOPDBSeeder extends Seeder
             'name' => 'John Doe',
             'email' => 'jdoe@poea.gov.ph',
             'password' => Hash::make('password'),
-            'nominee_id' => 3,
             'role' => 'user'
         ]);
 
@@ -97,21 +95,48 @@ class COOPDBSeeder extends Seeder
         ]);
 
         Nominee::create([
-            'user_id' => 2,
             'category_id' => 1,
-            'nominated_by' => 1
+            'user_id' => 2
         ]);
 
         Nominee::create([
-            'user_id' => 3,
             'category_id' => 1,
-            'nominated_by' => 1
+            'user_id' => 3
         ]);
 
         Nominee::create([
-            'user_id' => 1,
             'category_id' => 2,
-            'nominated_by' => 2
+            'user_id' => 1
         ]);
+
+        Nominee::create([
+            'category_id' => 2,
+            'user_id' => 4
+        ]);
+
+        Nominee::create([
+            'category_id' => 2,
+            'user_id' => 5
+        ]);
+
+        // Vote::create([
+        //     'voter_id' => 1,
+        //     'nominee_id' => 1
+        // ]);
+
+        // Vote::create([
+        //     'voter_id' => 1,
+        //     'nominee_id' => 3
+        // ]);
+
+        // Vote::create([
+        //     'voter_id' => 2,
+        //     'nominee_id' => 1
+        // ]);
+
+        // Vote::create([
+        //     'voter_id' => 2,
+        //     'nominee_id' => 4
+        // ]);
     }
 }

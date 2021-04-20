@@ -3,7 +3,10 @@
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="flex flex-col items-start justify-between w-full space-y-4">
         <div class="flex justify-center w-full">
-          <div class="flex flex-col items-center p-4 md:flex-grow">
+          <div
+            v-if="this.$page.props.user.status != 'voted'"
+            class="flex flex-col items-center p-4 md:flex-grow"
+          >
             <div class="mt-5 text-4xl font-bold text-center">
               COOP Election Nominees
             </div>
@@ -13,11 +16,10 @@
             >
               <!-- Category -->
               <div
-                class="flex flex-col items-center my-5"
+                class="flex flex-col items-center py-10 bg-gray-50"
                 v-for="category in Categories"
                 :key="`category-${category.id}`"
               >
-                <div class="h-0.5 w-1/2 my-2 bg-gray-300"></div>
                 <div class="text-2xl font-bold">
                   {{ category.name }}
                 </div>
@@ -34,23 +36,21 @@
                   >
                     <img
                       class="z-10 object-cover w-16 h-16 border-2 border-gray-200 rounded-full"
-                      :src="nominee.profile_photo_url"
-                      :alt="nominee.name"
+                      :src="nominee.user.profile_photo_url"
+                      :alt="nominee.user.name"
                     />
                     <div
                       class="px-4 py-2 truncate bg-gray-200 rounded-r-full hover:bg-gray-300 focus:outline-none"
-                      @click="handlesAddVote(category.id, nominee.nominee_id)"
                     >
-                      {{ nominee.name }}
+                      {{ nominee.user.name }}
 
                       <input
                         v-if="category.max_selection > 1"
                         type="checkbox"
                         v-model="form.ballot"
                         :value="{
-                          user_id: this.$page.props.user.id,
-                          category_id: category.id,
-                          nominee_id: nominee.nominee_id,
+                          voter_id: this.$page.props.user.id,
+                          nominee_id: nominee.id,
                         }"
                       />
                       <input
@@ -58,9 +58,8 @@
                         type="radio"
                         v-model="form.ballot[category.id - 1]"
                         :value="{
-                          user_id: this.$page.props.user.id,
-                          category_id: category.id,
-                          nominee_id: nominee.nominee_id,
+                          voter_id: this.$page.props.user.id,
+                          nominee_id: nominee.id,
                         }"
                       />
                     </div>
@@ -82,8 +81,7 @@
                         type="checkbox"
                         v-model="form.ballot"
                         :value="{
-                          user_id: this.$page.props.user.id,
-                          category_id: category.id,
+                          voter_id: this.$page.props.user.id,
                           nominee_id: 0,
                         }"
                       />
@@ -93,8 +91,7 @@
                         v-model="form.ballot[category.id - 1]"
                         checked
                         :value="{
-                          user_id: this.$page.props.user.id,
-                          category_id: category.id,
+                          voter_id: this.$page.props.user.id,
                           nominee_id: 0,
                         }"
                       />
@@ -106,12 +103,11 @@
           </div>
         </div>
 
-        <div class="flex justify-end w-full space-x-2">
+        <div class="flex justify-center w-full space-x-2">
           <inertia-link class="btn btn-text-error" :href="route('dashboard')"
             >Back</inertia-link
           >
           <button
-            v-if="Nominees.length"
             :class="
               this.$page.props.user.status == 'voted' ? '' : 'btn btn-success'
             "
@@ -137,7 +133,6 @@ export default {
   },
   props: {
     Categories: Array,
-    Nominees: Array,
   },
   data() {
     return {
@@ -153,13 +148,6 @@ export default {
       if (confirm("Are you sure you want to delete this user?")) {
         this.$inertia.delete(route("users.destroy", user));
       }
-    },
-    handlesAddVote(category, nominee) {
-      // this.form.ballot.push({
-      //   user_id: this.$page.props.user.id,
-      //   category_id: category,
-      //   nominee_id: nominee,
-      // });
     },
     handleSubmitVote() {
       console.log(this.form.ballot);

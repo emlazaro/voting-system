@@ -13,23 +13,12 @@ class Vote extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'nominee_id',
-        'category_id',
+        'voter_id',
     ];
-
-    public function user()
-    {
-        return $this->hasOne(User::class);
-    }
 
     public function nominee()
     {
-        return $this->hasOne(Nominee::class);
-    }
-
-    public function category()
-    {
-        return $this->hasOneThrough(Category::class, Nominee::class);
+        return $this->belongsTo(Nominee::class);
     }
 }

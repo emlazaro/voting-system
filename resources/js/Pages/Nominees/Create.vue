@@ -40,7 +40,7 @@
                   id="category_id"
                   class="block w-full mt-1"
                   v-model="form.category_id"
-                  autocomplete="user_id"
+                  autocomplete="category_id"
                   :items="Categories"
                 />
                 <jet-input-error

@@ -29,7 +29,6 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'nominee_id',
         'status',
     ];
 
@@ -64,13 +63,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function vote()
-    {
-        return $this->hasOne(Vote::class);
-    }
+    // public function nominee()
+    // {
+    //     return $this->belongsTo(Nominee::class, 'user_id', 'id');
+    // }
 
-    public function nominee()
+    public function nomination()
     {
-        return $this->belongsTo(Nominee::class);
+        return $this->hasOne(Nominee::class, 'user_id', 'id');
     }
 }

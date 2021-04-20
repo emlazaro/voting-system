@@ -16,7 +16,6 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->bigInteger('nominee_id')->nullable();
             $table->integer('max_selection')->default(1);
             $table->timestamps();
         });

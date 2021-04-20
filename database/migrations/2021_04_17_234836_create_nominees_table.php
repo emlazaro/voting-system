@@ -17,7 +17,6 @@ class CreateNomineesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('nominated_by')->nullable();
             $table->timestamps();
         });
     }

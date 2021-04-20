@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         return Inertia::render('Categories/Index', [
-            'Categories' => Category::with('nominees', 'votes')->get()
+            'Categories' => Category::with('nominees.user')->get()
         ]);
     }
 

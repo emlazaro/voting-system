@@ -11,7 +11,6 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'nominee_id',
         'max_selection',
     ];
 
@@ -21,11 +20,6 @@ class Category extends Model
 
     public function nominees()
     {
-        return $this->hasManyThrough(User::class, Nominee::class);
-    }
-
-    public function votes()
-    {
-        return $this->hasManyThrough(Vote::class, Nominee::class);
+        return $this->hasMany(Nominee::class);
     }
 }

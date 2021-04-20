@@ -21,7 +21,7 @@ class NomineeController extends Controller
     public function create()
     {
         return Inertia::render('Nominees/Create', [
-            'Users' => User::doesntHave('nominee')->get(),
+            'Users' => User::doesntHave('nomination')->get(),
             'Categories' => Category::all()
         ]);
     }
@@ -38,19 +38,11 @@ class NomineeController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-        $user = User::find($request->user_id);
-        $user->nominee_id = $nominee->id;
-        $user->save();
-
         return Redirect::route('nominees')->with(['success' => 'Nominee Created...']);
     }
 
     public function edit($id)
     {
-        $nominee = User::find($id);
-        return Inertia::render('Nominees/Edit', [
-            'editNominee' => $nominee
-        ]);
     }
 
     public function update(Request $request, Nominee $nominee)

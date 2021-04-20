@@ -51,12 +51,6 @@
                     </th>
                     <th
                       scope="col"
-                      class="px-6 py-3 text-xs font-semibold tracking-wider text-center text-gray-500 uppercase"
-                    >
-                      Total Votes
-                    </th>
-                    <th
-                      scope="col"
                       class="px-6 py-3 text-xs font-semibold tracking-wider text-left text-gray-500 uppercase"
                     >
                       Created At
@@ -87,15 +81,12 @@
                           v-for="nominee in category.nominees"
                           :key="`c${category.id}-n${nominee.id}`"
                         >
-                          {{ nominee.name }}
+                          {{ nominee.user.name }}
                         </li>
                       </ul>
                     </td>
                     <td class="px-6 py-4 text-center">
                       {{ category.max_selection }}
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                      {{ category.votes.length }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       {{ category.created_at }}

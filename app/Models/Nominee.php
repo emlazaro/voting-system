@@ -12,25 +12,24 @@ class Nominee extends Model
     protected $fillable = [
         'user_id',
         'category_id',
-        'nominated_by'
     ];
 
     protected $casts = [
         'created_at' => 'datetime:M-d-Y',
     ];
 
-    public function category()
+    public function votes()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Vote::class);
     }
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function votes()
+    public function category()
     {
-        return $this->hasManyThrough(Vote::class, User::class);
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 }

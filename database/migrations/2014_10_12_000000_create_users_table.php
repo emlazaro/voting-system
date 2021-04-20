@@ -20,10 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('user')->nullable();
-            $table->unsignedBigInteger('nominee_id')->nullable();
             $table->string('status')->default('not yet voted')->nullable();
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
         });

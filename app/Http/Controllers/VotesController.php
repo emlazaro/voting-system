@@ -20,8 +20,7 @@ class VotesController extends Controller
     public function index()
     {
         return Inertia::render('Votes/Index', [
-            'Categories' => Category::with('nominees')->get(),
-            'Nominees' => Nominee::all(),
+            'Categories' => Category::with('nominees.user', 'nominees.votes')->get(),
         ]);
     }
 
@@ -44,8 +43,7 @@ class VotesController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => ['required'],
-            'category_id' => ['required'],
+            'voter_id' => ['required'],
             'nominee_id' => ['required']
         ]);
         // $votes = [];
