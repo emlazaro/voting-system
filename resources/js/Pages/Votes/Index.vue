@@ -79,7 +79,7 @@
                       >
                         <img
                           class="z-10 object-cover w-16 h-16 rounded-full"
-                          src="http://127.0.0.1:8000/storage/profile-photos/abstain-vote.png"
+                          src="/storage/profile-photos/abstain-vote.png"
                           alt="Abstain vote"
                         />
 
@@ -105,7 +105,7 @@
                     v-else
                     class="flex flex-wrap items-center justify-around w-full my-4"
                   >
-                    <!-- RADIO BUTTON NOMINEES -->
+                    <!-- CHECKBOX NOMINEES -->
                     <div
                       class="flex items-center justify-center flex-1"
                       v-for="nominee in category.nominees"
@@ -121,13 +121,13 @@
                         />
 
                         <label
-                          :for="`rb-${nominee.id}`"
+                          :for="`cb-${nominee.id}`"
                           class="font-bold tracking-wide cursor-pointer"
                         >
                           {{ nominee.user.name }}
                         </label>
                         <input
-                          :id="`rb-${nominee.id}`"
+                          :id="`cb-${nominee.id}`"
                           type="checkbox"
                           v-model="form.ballot"
                           :value="{

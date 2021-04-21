@@ -18,7 +18,7 @@
         <div
           v-if="this.$page.props.success || this.$page.props.error"
           :class="this.$page.props.success ? `bg-green-500` : `bg-red-500`"
-          class="flex items-center justify-between px-4 py-2 font-semibold text-white rounded-md"
+          class="flex items-center justify-between px-4 py-2 font-semibold text-white rounded-md mb-5"
         >
           {{ this.$page.props.success }}
           <button

@@ -34,6 +34,20 @@
               </div>
               <!-- Max Selection -->
               <div class="col-span-6 sm:col-span-4">
+                <jet-label for="name" value="Max Selection" />
+                <jet-input
+                  id="name"
+                  type="number"
+                  min="1"
+                  max="10"
+                  class="block w-full mt-1"
+                  v-model="form.max_selection"
+                  autocomplete="category.max_selection"
+                />
+                <jet-input-error :message="form.errors.max_selection" class="mt-2" />
+              </div>
+              <!-- Max Selection -->
+              <!-- <div class="col-span-6 sm:col-span-4">
                 <jet-label for="max_selection" value="Max Selection" />
                 <jet-select
                   id="max_selection"
@@ -46,7 +60,7 @@
                   :message="form.errors.max_selection"
                   class="mt-2"
                 />
-              </div>
+              </div> -->
             </template>
 
             <template #actions>

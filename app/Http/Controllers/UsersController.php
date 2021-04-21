@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 use Inertia\Inertia;
 
@@ -73,6 +74,6 @@ class UsersController extends Controller
         $user->nomination()->delete();
         $user->delete();
 
-        return redirect()->route('users')->with(['success' => 'User data has been deleted']);
+        return Redirect::route('users')->with(['success' => 'User data has been deleted']);
     }
 }

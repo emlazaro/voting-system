@@ -2,12 +2,12 @@
   <div class="flex flex-col max-w-5xl min-h-screen mx-auto sm:px-6 lg:px-8">
     <div class="p-5">
       <div id="header-result" class="flex items-center space-x-3">
-        <img class="w-16 h-16 bg-gray-300 rounded-full" />
+        <img class="w-16 h-16 bg-gray-300 rounded-full object-cover" src="/storage/profile-photos/pempco_logo.png" />
         <div class="flex flex-col -space-y-1">
-          <span class="text-lg italic font-bold">POEA</span>
-          <span class="text-lg italic font-bold">Employees</span>
-          <span class="text-lg italic font-bold">Multi-purpose</span>
-          <span class="text-lg italic font-bold">Cooperative, Inc.</span>
+          <span class="italic font-bold">POEA</span>
+          <span class="italic font-bold">Employees</span>
+          <span class="italic font-bold">Multi-purpose</span>
+          <span class="italic font-bold">Cooperative, Inc.</span>
         </div>
       </div>
       <div class="flex flex-col items-center">
@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-2 mt-20 text-xs divide-x-2 divide-gray-500">
+        <div class="grid grid-cols-2 mt-28 text-xs divide-x-2 divide-gray-500 fixed bottom-10">
           <div class="flex flex-col text-right">
             <div class="italic font-bold uppercase">Services Offered:</div>
             <div class="italic font-semibold">Canteen, Catering</div>

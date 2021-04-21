@@ -16,6 +16,21 @@
 
     <div class="py-5">
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <!-- FLASH ALERT -->
+        <div
+          v-if="this.$page.props.success || this.$page.props.error"
+          :class="this.$page.props.success ? `bg-green-500` : `bg-red-500`"
+          class="flex items-center justify-between px-4 py-2 font-semibold text-white rounded-md mb-5"
+        >
+          {{ this.$page.props.success }}
+          <button
+            class="focus:outline-none hover:text-gray-500"
+            type="button"
+            @click="this.$page.props.success = null"
+          >
+            <icon name="close" />
+          </button>
+        </div>
         <div class="flex flex-col items-start justify-between w-full space-y-4">
           <div
             class="flex flex-col items-start justify-between w-full p-4 space-y-4 md:p-0"
