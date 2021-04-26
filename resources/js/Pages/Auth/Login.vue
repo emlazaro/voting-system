@@ -13,20 +13,20 @@
         </inertia-link>
 
         <template v-else>
-          <inertia-link
+          <!-- <inertia-link
             v-if="canRegister"
             :href="route('register')"
             class="ml-4 text-sm text-gray-700 underline"
           >
             Register
-          </inertia-link>
+          </inertia-link> -->
         </template>
       </div>
       <template #logo>
         <div class="flex items-center space-x-4">
-          <jet-authentication-card-logo class="text-gray-800" />
-
-          <div class="text-5xl text-gray-800">Voting System</div>
+          <!-- <jet-authentication-card-logo class="text-gray-800" /> -->
+          <img class="w-20 shadow-md" src="/storage/resources/poea_logo.png" />
+          <div class="text-5xl font-semibold text-gray-800">Voting System</div>
         </div>
       </template>
       <jet-validation-errors class="mb-4" />
@@ -74,7 +74,14 @@
           </inertia-link>
         </div>
 
-        <div class="flex justify-between mt-4 space-x-3">
+        <div class="flex items-center justify-between mt-4 space-x-3">
+          <inertia-link
+            v-if="canRegister"
+            :href="route('register')"
+            class="w-1/2 text-center btn btn-text-primary"
+          >
+            Register
+          </inertia-link>
           <button
             class="w-1/2 btn btn-primary"
             :class="{ 'opacity-25': form.processing }"
@@ -89,15 +96,6 @@
         >
           Log in
         </jet-button> -->
-
-          <inertia-link
-            as="button"
-            v-if="canRegister"
-            :href="route('register')"
-            class="w-1/2 text-sm text-center text-gray-700 btn btn-outline-success"
-          >
-            Register
-          </inertia-link>
         </div>
       </form>
     </jet-authentication-card>
