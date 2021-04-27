@@ -150,12 +150,12 @@
           </inertia-link>
           <button
             :class="
-              form.length != form.ballot.length
+              form.ballot.length <= Categories.length
                 ? 'btn bg-gray-100 cursor-not-allowed'
                 : 'btn btn-success cursor-pointer'
             "
             @click="handleSubmitVote"
-            :disabled="form.length != form.ballot.length"
+            :disabled="form.ballot.length <= Categories.length"
           >
             <span> Submit Vote </span>
           </button>
@@ -189,9 +189,12 @@
 <script>
 import Icon from "@/Shared/Icon";
 
+import Swal from "sweetalert2";
+
 export default {
   components: {
     Icon,
+    Swal,
   },
   props: {
     Categories: Array,
@@ -213,8 +216,20 @@ export default {
       }
     },
     handleSubmitVote() {
-      console.log(this.form.ballot);
-      this.form.post("/votes");
+      //console.log(this.form.ballot);
+      Swal.fire({
+        title: "Confirm submit your vote?",
+        text: "You cannot undo your vote once submitted...",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, I want to submit my vote",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.form.post("/votes");
+        }
+      });
       // this.$inertia.visit("/votes", {
       //   data: this.ballot,
       //   method: "post",

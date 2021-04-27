@@ -12,7 +12,10 @@
     <div>
       <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div>
-          <jet-form-section @submitted="handleUpdate">
+          <jet-form-section
+            @submitted="handleUpdate"
+            class="flex flex-col px-4"
+          >
             <template #title> Category Information </template>
 
             <template #description>
@@ -44,7 +47,10 @@
                   v-model="form.max_selection"
                   autocomplete="category.max_selection"
                 />
-                <jet-input-error :message="form.errors.max_selection" class="mt-2" />
+                <jet-input-error
+                  :message="form.errors.max_selection"
+                  class="mt-2"
+                />
               </div>
               <!-- Max Selection -->
               <!-- <div class="col-span-6 sm:col-span-4">

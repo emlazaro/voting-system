@@ -18,7 +18,7 @@
         <div
           v-if="this.$page.props.success || this.$page.props.error"
           :class="this.$page.props.success ? `bg-green-500` : `bg-red-500`"
-          class="flex items-center justify-between px-4 py-2 font-semibold text-white rounded-md mb-5"
+          class="flex items-center justify-between px-4 py-2 mb-5 font-semibold text-white rounded-md"
         >
           {{ this.$page.props.success }}
           <button
@@ -131,6 +131,8 @@
 <script>
 import AppLayout from "@/Layouts/AppLayout";
 import Icon from "@/Shared/Icon";
+import Swal from "sweetalert2";
+
 export default {
   components: {
     AppLayout,
@@ -144,9 +146,19 @@ export default {
   },
   methods: {
     handleDelete(user) {
-      if (confirm("Are you sure you want to delete this user?")) {
-        this.$inertia.delete(route("users.destroy", user));
-      }
+      Swal.fire({
+        title: "Are you sure you want to delete this user??",
+        text: "You cannot change undo this action...",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Delete user",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$inertia.delete(route("users.destroy", user));
+        }
+      });
     },
   },
 };

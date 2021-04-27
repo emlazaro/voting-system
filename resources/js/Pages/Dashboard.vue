@@ -7,12 +7,15 @@
     </template>
     <div class="py-5">
       <div class="flex flex-col mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+        <div class="text-3xl font-semibold text-center">
+          Welcome to POEA - COOP ELECTION 2021!
+        </div>
         <!-- MAIN CONTENT -->
         <div
           class="flex flex-col flex-wrap items-start justify-between w-full p-4 space-y-3 md:flex-nowrap md:p-0 md:flex-row md:space-x-4 md:space-y-0"
         >
           <div class="w-full p-4 bg-white rounded shadow">
-            <div class="mb-2">Voters</div>
+            <div class="mb-2">Registered Voters</div>
             <hr />
             <div class="text-2xl font-semibold">{{ Users.length }}</div>
           </div>

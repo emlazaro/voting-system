@@ -12,7 +12,7 @@
     <div>
       <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div>
-          <jet-form-section @submitted="handleSave">
+          <jet-form-section @submitted="handleSave" class="flex flex-col px-4">
             <template #title> Nominee Information </template>
 
             <template #description>

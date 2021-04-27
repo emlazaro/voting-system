@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Nominee;
 use App\Models\User;
 use App\Models\Vote;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,71 +23,79 @@ class COOPDBSeeder extends Seeder
             'name' => 'Eduardo Lazaro III',
             'email' => 'elazaro@poea.gov.ph',
             'password' => Hash::make('admin123'),
-            'role' => 'admin'
+            'role' => 'user',
+            'email_verified_at' => Carbon::now()
         ]);
 
         User::create([
             'name' => 'Ricky Capin',
             'email' => 'rcapin@poea.gov.ph',
             'password' => Hash::make('admin123'),
-            'role' => 'admin'
+            'role' => 'admin',
+            'email_verified_at' => Carbon::now()
         ]);
 
         User::create([
             'name' => 'Jeri Barinaga',
             'email' => 'jbarinaga@poea.gov.ph',
             'password' => Hash::make('admin123'),
-            'role' => 'admin'
+            'role' => 'admin',
+            'email_verified_at' => Carbon::now()
         ]);
 
         User::create([
             'name' => 'John Doe',
             'email' => 'jdoe@poea.gov.ph',
             'password' => Hash::make('password'),
-            'role' => 'user'
+            'role' => 'user',
+            'email_verified_at' => Carbon::now()
         ]);
 
         User::create([
             'name' => 'Jane Doe',
             'email' => 'jdoe2@poea.gov.ph',
             'password' => Hash::make('password'),
-            'role' => 'user'
+            'role' => 'user',
+            'email_verified_at' => Carbon::now()
         ]);
 
         User::create([
-            'name' => 'Test Doe',
-            'email' => 'tdoe2@poea.gov.ph',
+            'name' => 'Test1 Doe',
+            'email' => 'test1@poea.gov.ph',
             'password' => Hash::make('password'),
-            'role' => 'user'
+            'role' => 'user',
+            'email_verified_at' => Carbon::now()
         ]);
 
         User::create([
             'name' => 'Test2 Doe',
-            'email' => 't2doe2@poea.gov.ph',
+            'email' => 'test2@poea.gov.ph',
             'password' => Hash::make('password'),
-            'role' => 'user'
+            'role' => 'user',
+            'email_verified_at' => Carbon::now()
         ]);
 
         User::create([
             'name' => 'Test3 Doe',
-            'email' => 't3doe2@poea.gov.ph',
+            'email' => 'test3@poea.gov.ph',
             'password' => Hash::make('password'),
-            'role' => 'user'
+            'role' => 'user',
+            'email_verified_at' => Carbon::now()
         ]);
 
         Category::create([
             'name' => 'Board of Directors',
-            'max_selection' => 1,
+            'max_selection' => 2,
         ]);
 
         Category::create([
             'name' => 'Audit and Inventory Committee',
-            'max_selection' => 1,
+            'max_selection' => 2,
         ]);
 
         Category::create([
             'name' => 'Election Committee',
-            'max_selection' => 1,
+            'max_selection' => 2,
         ]);
 
         Nominee::create([

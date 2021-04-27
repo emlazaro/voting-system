@@ -110,6 +110,7 @@ import JetInput from "@/Jetstream/Input";
 import JetCheckbox from "@/Jetstream/Checkbox";
 import JetLabel from "@/Jetstream/Label";
 import JetValidationErrors from "@/Jetstream/ValidationErrors";
+import Swal from "sweetalert2";
 
 export default {
   components: {
@@ -146,7 +147,15 @@ export default {
           remember: this.form.remember ? "on" : "",
         }))
         .post(this.route("login"), {
-          onFinish: () => this.form.reset("password"),
+          onFinish: () => {
+            this.form.reset("password");
+            Swal.fire({
+              title: "Welcome!",
+              text: "Welcome to POEA - COOP Voting System!!!!",
+              icon: "success",
+              confirmButtonText: "Thanks!",
+            });
+          },
         });
     },
   },

@@ -9,3 +9,13 @@
     background-image: url("/storage/resources/poea_building.jpg");
     background-size: cover;
 }
+
+#print-only {
+    display: none;
+}
+
+@media print {
+    #print-only {
+        display: flex !important;
+    }
+}
