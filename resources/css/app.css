@@ -4,7 +4,6 @@
 
 @import url("./button.css");
 @import url("./scroll.css");
-
 #login-box {
     background-image: url("/storage/resources/poea_building.jpg");
     background-size: cover;

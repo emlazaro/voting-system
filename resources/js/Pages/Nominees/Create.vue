@@ -28,6 +28,7 @@
                   class="block w-full mt-1"
                   v-model="form.user_id"
                   autocomplete="user_id"
+                  placeholder="User"
                   :items="Users"
                 />
                 <jet-input-error :message="form.errors.user_id" class="mt-2" />
@@ -41,6 +42,7 @@
                   class="block w-full mt-1"
                   v-model="form.category_id"
                   autocomplete="category_id"
+                  placeholder="Category"
                   :items="Categories"
                 />
                 <jet-input-error

@@ -23,7 +23,6 @@
             class="block w-full mt-1"
             v-model="form.name"
             required
-            autofocus
             autocomplete="name"
           />
         </div>
@@ -40,6 +39,17 @@
         </div>
 
         <div class="mt-4">
+          <jet-label for="phone_number" value="Mobile Number" />
+          <jet-input
+            id="phone_number"
+            type="text"
+            class="block w-full mt-1"
+            v-model="form.phone_number"
+            required
+          />
+        </div>
+
+        <!-- <div class="mt-4">
           <jet-label for="password" value="Password" />
           <jet-input
             id="password"
@@ -61,7 +71,7 @@
             required
             autocomplete="new-password"
           />
-        </div>
+        </div> -->
 
         <div
           class="mt-4"
@@ -141,9 +151,10 @@ export default {
       form: this.$inertia.form({
         name: "",
         email: "",
+        phone_number: null,
         password: "",
         password_confirmation: "",
-        terms: false,
+        terms: true,
       }),
     };
   },
@@ -153,6 +164,9 @@ export default {
       this.form.post(this.route("register"), {
         onFinish: () => this.form.reset("password", "password_confirmation"),
       });
+    },
+    test() {
+      console.log(this.form);
     },
   },
 };

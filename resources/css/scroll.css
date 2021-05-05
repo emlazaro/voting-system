@@ -9,8 +9,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 8px;
+    @apply bg-gray-100 border-radius: 8px;
 }
 
 /* Handle */

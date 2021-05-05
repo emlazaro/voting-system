@@ -112,6 +112,7 @@
                       <icon name="edit" class="w-6 h-6" />
                     </inertia-link>
                     <button
+                      v-if="user.id != this.$page.props.user.id"
                       type="button"
                       class="mx-1 text-red-400 focus:outline-none"
                       @click="handleDelete(user)"

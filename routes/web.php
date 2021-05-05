@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\OTPController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\VotesController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,13 +20,6 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//     ]);
-// });
-
 Route::get('/login', function () {
     return Inertia::render('Auth/Login', [
         'canLogin' => Route::has('login'),
@@ -35,7 +28,13 @@ Route::get('/login', function () {
     ]);
 })->name('login')->middleware('guest');
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::post('login', [OTPController::class, 'login'])->name('login.attempt')->middleware('guest');
+Route::get('login/verify', [OTPController::class, 'verify'])->name('login.verify')->middleware('guest');
+Route::post('verify', [OTPController::class, 'authenticate'])->name('login.auth')->middleware('guest');
+Route::post('verify/resend', [OTPController::class, 'resend'])->name('login.resend')->middleware('guest');
+
+
+Route::middleware(['auth', 'twofactor', 'verified'])->group(function () {
     //Dashboard
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 

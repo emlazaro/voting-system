@@ -139,7 +139,7 @@ export default {
   },
   props: {
     Users: Array,
-    Votes: Array,
+    Votes: Number,
     Categories: Array,
     Nominees: Array,
   },

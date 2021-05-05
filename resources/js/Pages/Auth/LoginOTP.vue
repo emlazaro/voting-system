@@ -36,49 +36,70 @@
       </div>
 
       <form @submit.prevent="submit">
-        <div>
+        <div class="mb-4 text-lg font-semibold text-center">
+          Login using your...
+        </div>
+
+        <div class="py-4" v-if="!form.loginUsing">
+          <button
+            @click="form.loginUsing = 'email'"
+            type="button"
+            class="w-full bg-indigo-100 shadow btn"
+          >
+            Email Address...
+          </button>
+          <div class="my-4 font-semibold text-center">-- OR --</div>
+          <button
+            @click="form.loginUsing = 'number'"
+            type="button"
+            class="w-full bg-green-100 shadow btn"
+          >
+            Mobile number...
+          </button>
+        </div>
+
+        <div v-if="form.loginUsing == 'email'" class="pb-2">
           <jet-label for="email" value="Email" />
           <jet-input
             id="email"
             type="email"
             class="block w-full mt-1"
             v-model="form.email"
-            required
             autofocus
           />
         </div>
-
-        <!-- <div class="mt-4">
-          <jet-label for="password" value="Password" />
+        <div v-else-if="form.loginUsing == 'number'" class="pb-2">
+          <jet-label for="phone_number" value="Phone Number" />
+          <jet-input
+            id="phone_number"
+            type="text"
+            class="block w-full mt-1"
+            v-model="form.phone_number"
+          />
+        </div>
+        <div class="my-2" v-if="isOTPSent && form.loginUsing != null">
+          <jet-label for="password" value="One-Time Password (OTP)" />
           <jet-input
             id="password"
-            type="password"
+            type="text"
             class="block w-full mt-1"
             v-model="form.password"
-            required
-            autocomplete="current-password"
           />
-        </div> -->
-
-        <!-- <div class="flex justify-between mt-4">
-          <label class="flex items-center">
-            <jet-checkbox name="remember" v-model:checked="form.remember" />
-            <span class="ml-2 text-sm text-gray-600">Remember me</span>
-          </label>
-          <inertia-link
-            v-if="canResetPassword"
-            :href="route('password.request')"
-            class="text-sm text-gray-600 underline hover:text-gray-900"
+        </div>
+        <div v-if="form.loginUsing">
+          <button
+            @click="form.loginUsing = null"
+            type="button"
+            class="w-full mt-4 bg-gray-100 btn"
           >
-            Forgot your password?
-          </inertia-link>
-        </div> -->
-
+            Choose other method...
+          </button>
+        </div>
         <div class="flex items-center justify-between mt-4 space-x-3">
           <inertia-link
             v-if="canRegister"
             :href="route('register')"
-            class="w-1/2 text-center btn btn-text-success"
+            class="w-1/2 text-center btn btn-text-primary"
           >
             Register
           </inertia-link>
@@ -110,7 +131,6 @@ import JetInput from "@/Jetstream/Input";
 import JetCheckbox from "@/Jetstream/Checkbox";
 import JetLabel from "@/Jetstream/Label";
 import JetValidationErrors from "@/Jetstream/ValidationErrors";
-import Swal from "sweetalert2";
 
 export default {
   components: {
@@ -127,13 +147,17 @@ export default {
     canRegister: Boolean,
     canResetPassword: Boolean,
     status: String,
+    isOTPSent: Boolean,
+    credentials: Array,
   },
 
   data() {
     return {
       form: this.$inertia.form({
-        email: "",
-        remember: false,
+        loginUsing: null,
+        email: null,
+        phone_number: null,
+        password: null,
       }),
     };
   },
@@ -145,18 +169,10 @@ export default {
           ...data,
           remember: this.form.remember ? "on" : "",
         }))
-        .post(this.route("login.attempt"), {
-          // onFinish: () => {
-          //   this.form.reset("password");
-          // },
-          // onSuccess: () => {
-          //   Swal.fire({
-          //     title: "Welcome!",
-          //     text: "Welcome to POEA - COOP Voting System!!!!",
-          //     icon: "success",
-          //     confirmButtonText: "Thanks!",
-          //   });
-          // },
+        .post(this.route("otp.attempt"), {
+          onFinish: () => {
+            this.form.reset("password");
+          },
         });
     },
   },

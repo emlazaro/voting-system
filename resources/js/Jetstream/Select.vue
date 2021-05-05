@@ -5,7 +5,7 @@
     @change="$emit('update:modelValue', $event.target.value)"
     ref="input"
   >
-    <option value="0" selected disabled>Select user to nominate...</option>
+    <option value="0" selected disabled>Select {{ placeholder }}...</option>
     <option v-for="item in items" :key="`select-${item.id}`" :value="item.id">
       {{ item.name }}
     </option>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  props: ["modelValue", "items"],
+  props: ["modelValue", "items", "placeholder"],
 
   emits: ["update:modelValue"],
 

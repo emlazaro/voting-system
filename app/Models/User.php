@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Vote;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -28,8 +29,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'phone_number',
+        'isVerified',
         'role',
         'status',
+        'two_factor_code',
+        'two_factor_expires_at',
     ];
 
     /**
@@ -52,6 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime:M-d-Y',
+        'two_factor_expires_at' => 'datetime',
     ];
 
     /**
@@ -76,5 +82,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function votes()
     {
         return $this->hasMany(Vote::class, 'voter_id', 'id');
+    }
+
+    public function generateTwoFactorCode()
+    {
+        $otp = rand(100000, 999999);
+        $this->timestamps = false;
+        $this->password = Hash::make($otp);
+        $this->two_factor_code = $otp;
+        $this->two_factor_expires_at = now()->addMinutes(20);
+        $this->save();
+    }
+
+    public function resetTwoFactorCode()
+    {
+        $this->timestamps = false;
+        $this->two_factor_code = null;
+        $this->two_factor_expires_at = null;
+        $this->save();
     }
 }

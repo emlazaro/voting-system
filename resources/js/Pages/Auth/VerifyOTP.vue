@@ -26,7 +26,7 @@
         <div class="flex items-center space-x-4">
           <!-- <jet-authentication-card-logo class="text-gray-800" /> -->
           <img class="w-20 shadow-md" src="/storage/resources/poea_logo.png" />
-          <div class="text-5xl font-semibold text-gray-800">Voting System</div>
+          <div class="text-5xl font-semibold text-gray-800">Verify Login</div>
         </div>
       </template>
       <jet-validation-errors class="mb-4" />
@@ -35,59 +35,35 @@
         {{ status }}
       </div>
 
-      <form @submit.prevent="submit">
+      <form @submit.prevent="handleSubmit">
         <div>
-          <jet-label for="email" value="Email" />
+          <jet-label for="otp" value="One-Time Password" />
           <jet-input
-            id="email"
-            type="email"
+            id="otp"
+            type="text"
             class="block w-full mt-1"
-            v-model="form.email"
+            v-model="form.password"
             required
             autofocus
           />
         </div>
 
-        <!-- <div class="mt-4">
-          <jet-label for="password" value="Password" />
-          <jet-input
-            id="password"
-            type="password"
-            class="block w-full mt-1"
-            v-model="form.password"
-            required
-            autocomplete="current-password"
-          />
-        </div> -->
-
-        <!-- <div class="flex justify-between mt-4">
-          <label class="flex items-center">
-            <jet-checkbox name="remember" v-model:checked="form.remember" />
-            <span class="ml-2 text-sm text-gray-600">Remember me</span>
-          </label>
-          <inertia-link
-            v-if="canResetPassword"
-            :href="route('password.request')"
-            class="text-sm text-gray-600 underline hover:text-gray-900"
-          >
-            Forgot your password?
-          </inertia-link>
-        </div> -->
-
         <div class="flex items-center justify-between mt-4 space-x-3">
-          <inertia-link
-            v-if="canRegister"
-            :href="route('register')"
-            class="w-1/2 text-center btn btn-text-success"
-          >
-            Register
-          </inertia-link>
           <button
-            class="w-1/2 btn btn-primary"
+            class="w-full btn btn-primary"
             :class="{ 'opacity-25': form.processing }"
             :disabled="form.processing"
           >
-            Log in
+            Verify OTP
+          </button>
+          <button
+            class="w-full bg-gray-100 btn hover:bg-gray-200"
+            :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing"
+            type="button"
+            @click="handleResend"
+          >
+            Resend OTP
           </button>
           <!-- <jet-button
           class="ml-2"
@@ -124,40 +100,33 @@ export default {
   },
 
   props: {
-    canRegister: Boolean,
-    canResetPassword: Boolean,
-    status: String,
+    credentials: String,
   },
 
   data() {
     return {
       form: this.$inertia.form({
-        email: "",
-        remember: false,
+        email: this.$page.props.credentials,
+        password: null,
       }),
     };
   },
 
   methods: {
-    submit() {
-      this.form
-        .transform((data) => ({
-          ...data,
-          remember: this.form.remember ? "on" : "",
-        }))
-        .post(this.route("login.attempt"), {
-          // onFinish: () => {
-          //   this.form.reset("password");
-          // },
-          // onSuccess: () => {
-          //   Swal.fire({
-          //     title: "Welcome!",
-          //     text: "Welcome to POEA - COOP Voting System!!!!",
-          //     icon: "success",
-          //     confirmButtonText: "Thanks!",
-          //   });
-          // },
-        });
+    handleSubmit() {
+      this.form.post(route("login.auth"), {
+        onSuccess: () => {
+          Swal.fire({
+            title: "Welcome!",
+            text: "Welcome to POEA - COOP Voting System!!!!",
+            icon: "success",
+            confirmButtonText: "Thanks!",
+          });
+        },
+      });
+    },
+    handleResend() {
+      this.form.post(route("login.resend"));
     },
   },
 };

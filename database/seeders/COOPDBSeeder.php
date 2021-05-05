@@ -23,6 +23,7 @@ class COOPDBSeeder extends Seeder
             'name' => 'Eduardo Lazaro III',
             'email' => 'elazaro@poea.gov.ph',
             'password' => Hash::make('admin123'),
+            'phone_number' => '+639774739819',
             'role' => 'user',
             'email_verified_at' => Carbon::now()
         ]);
