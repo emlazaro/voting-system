@@ -1,54 +1,59 @@
 <template>
-  <div id="login-box">
-    <jet-authentication-card
-      class="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50 bg-opacity-60"
-    >
-      <div class="fixed top-0 right-0 hidden px-6 py-4 sm:block">
-        <inertia-link
-          v-if="$page.props.user"
-          href="/dashboard"
-          class="text-sm text-gray-700 underline"
+    <div id="login-box">
+        <jet-authentication-card
+            class="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50 bg-opacity-60"
         >
-          Dashboard
-        </inertia-link>
+            <div class="fixed top-0 right-0 hidden px-6 py-4 sm:block">
+                <inertia-link
+                    v-if="$page.props.user"
+                    href="/dashboard"
+                    class="text-sm text-gray-700 underline"
+                >
+                    Dashboard
+                </inertia-link>
 
-        <template v-else>
-          <!-- <inertia-link
+                <template v-else>
+                    <!-- <inertia-link
             v-if="canRegister"
             :href="route('register')"
             class="ml-4 text-sm text-gray-700 underline"
           >
             Register
           </inertia-link> -->
-        </template>
-      </div>
-      <template #logo>
-        <div class="flex items-center space-x-4">
-          <!-- <jet-authentication-card-logo class="text-gray-800" /> -->
-          <img class="w-20 shadow-md" src="/storage/resources/poea_logo.png" />
-          <div class="text-5xl font-semibold text-gray-800">Voting System</div>
-        </div>
-      </template>
-      <jet-validation-errors class="mb-4" />
+                </template>
+            </div>
+            <template #logo>
+                <div class="flex items-center space-x-4">
+                    <!-- <jet-authentication-card-logo class="text-gray-800" /> -->
+                    <img
+                        class="w-20 drop-shadow-md"
+                        :src="'../storage/logo.png'"
+                    />
+                    <div class="text-5xl font-semibold text-gray-800">
+                        Voting System
+                    </div>
+                </div>
+            </template>
+            <jet-validation-errors class="mb-4" />
 
-      <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
-        {{ status }}
-      </div>
+            <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
+                {{ status }}
+            </div>
 
-      <form @submit.prevent="submit">
-        <div>
-          <jet-label for="email" value="Email" />
-          <jet-input
-            id="email"
-            type="email"
-            class="block w-full mt-1"
-            v-model="form.email"
-            required
-            autofocus
-          />
-        </div>
+            <form @submit.prevent="submit">
+                <div>
+                    <jet-label for="email" value="Email" />
+                    <jet-input
+                        id="email"
+                        type="email"
+                        class="block w-full mt-1"
+                        v-model="form.email"
+                        required
+                        autofocus
+                    />
+                </div>
 
-        <!-- <div class="mt-4">
+                <!-- <div class="mt-4">
           <jet-label for="password" value="Password" />
           <jet-input
             id="password"
@@ -60,7 +65,7 @@
           />
         </div> -->
 
-        <!-- <div class="flex justify-between mt-4">
+                <!-- <div class="flex justify-between mt-4">
           <label class="flex items-center">
             <jet-checkbox name="remember" v-model:checked="form.remember" />
             <span class="ml-2 text-sm text-gray-600">Remember me</span>
@@ -74,32 +79,32 @@
           </inertia-link>
         </div> -->
 
-        <div class="flex items-center justify-between mt-4 space-x-3">
-          <inertia-link
-            v-if="canRegister"
-            :href="route('register')"
-            class="w-1/2 text-center btn btn-text-success"
-          >
-            Register
-          </inertia-link>
-          <button
-            class="w-1/2 btn btn-primary"
-            :class="{ 'opacity-25': form.processing }"
-            :disabled="form.processing"
-          >
-            Log in
-          </button>
-          <!-- <jet-button
+                <div class="flex items-center justify-between mt-4 space-x-3">
+                    <inertia-link
+                        v-if="canRegister"
+                        :href="route('register')"
+                        class="w-1/2 text-center btn btn-text-success"
+                    >
+                        Register
+                    </inertia-link>
+                    <button
+                        class="w-1/2 btn btn-primary"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
+                        Log in
+                    </button>
+                    <!-- <jet-button
           class="ml-2"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
           Log in
         </jet-button> -->
-        </div>
-      </form>
-    </jet-authentication-card>
-  </div>
+                </div>
+            </form>
+        </jet-authentication-card>
+    </div>
 </template>
 
 <script>
@@ -113,52 +118,63 @@ import JetValidationErrors from "@/Jetstream/ValidationErrors";
 import Swal from "sweetalert2";
 
 export default {
-  components: {
-    JetAuthenticationCard,
-    JetAuthenticationCardLogo,
-    JetButton,
-    JetInput,
-    JetCheckbox,
-    JetLabel,
-    JetValidationErrors,
-  },
-
-  props: {
-    canRegister: Boolean,
-    canResetPassword: Boolean,
-    status: String,
-  },
-
-  data() {
-    return {
-      form: this.$inertia.form({
-        email: "",
-        remember: false,
-      }),
-    };
-  },
-
-  methods: {
-    submit() {
-      this.form
-        .transform((data) => ({
-          ...data,
-          remember: this.form.remember ? "on" : "",
-        }))
-        .post(this.route("login.attempt"), {
-          // onFinish: () => {
-          //   this.form.reset("password");
-          // },
-          // onSuccess: () => {
-          //   Swal.fire({
-          //     title: "Welcome!",
-          //     text: "Welcome to POEA - COOP Voting System!!!!",
-          //     icon: "success",
-          //     confirmButtonText: "Thanks!",
-          //   });
-          // },
-        });
+    components: {
+        JetAuthenticationCard,
+        JetAuthenticationCardLogo,
+        JetButton,
+        JetInput,
+        JetCheckbox,
+        JetLabel,
+        JetValidationErrors,
     },
-  },
+
+    props: {
+        canRegister: Boolean,
+        canResetPassword: Boolean,
+        status: String,
+    },
+
+    data() {
+        return {
+            form: this.$inertia.form({
+                email: "",
+                remember: false,
+            }),
+        };
+    },
+
+    methods: {
+        submit() {
+            this.form
+                .transform((data) => ({
+                    ...data,
+                    remember: this.form.remember ? "on" : "",
+                }))
+                .post(this.route("login.attempt"), {
+                    // onFinish: () => {
+                    //   this.form.reset("password");
+                    // },
+                    // onSuccess: () => {
+                    //   Swal.fire({
+                    //     title: "Welcome!",
+                    //     text: "Welcome to POEA - COOP Voting System!!!!",
+                    //     icon: "success",
+                    //     confirmButtonText: "Thanks!",
+                    //   });
+                    // },
+                });
+        },
+    },
 };
 </script>
+<style scoped>
+.btn {
+    @apply px-4 py-2 font-semibold tracking-wide rounded focus:outline-none focus:ring-4;
+}
+.btn-primary {
+    @apply text-white bg-blue-500 focus:ring-blue-300 hover:bg-blue-600;
+}
+.btn-text-success {
+    @apply text-green-500 hover:bg-green-500 hover:text-white focus:ring-green-300;
+}
+</style>
