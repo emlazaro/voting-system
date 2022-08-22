@@ -21,16 +21,16 @@ class COOPDBSeeder extends Seeder
     {
         User::create([
             'name' => 'Eduardo Lazaro III',
-            'email' => 'elazaro@poea.gov.ph',
+            'email' => 'elazaro@dmw.gov.ph',
             'password' => Hash::make('admin123'),
             'phone_number' => '+639774739819',
-            'role' => 'user',
+            'role' => 'admin',
             'email_verified_at' => Carbon::now()
         ]);
 
         User::create([
             'name' => 'Ricky Capin',
-            'email' => 'rcapin@poea.gov.ph',
+            'email' => 'rcapin@dmw.gov.ph',
             'password' => Hash::make('admin123'),
             'role' => 'admin',
             'email_verified_at' => Carbon::now()
@@ -38,7 +38,7 @@ class COOPDBSeeder extends Seeder
 
         User::create([
             'name' => 'Jeri Barinaga',
-            'email' => 'jbarinaga@poea.gov.ph',
+            'email' => 'jbarinaga@dmw.gov.ph',
             'password' => Hash::make('admin123'),
             'role' => 'admin',
             'email_verified_at' => Carbon::now()
@@ -46,7 +46,7 @@ class COOPDBSeeder extends Seeder
 
         User::create([
             'name' => 'John Doe',
-            'email' => 'jdoe@poea.gov.ph',
+            'email' => 'jdoe@dmw.gov.ph',
             'password' => Hash::make('password'),
             'role' => 'user',
             'email_verified_at' => Carbon::now()
@@ -54,7 +54,7 @@ class COOPDBSeeder extends Seeder
 
         User::create([
             'name' => 'Jane Doe',
-            'email' => 'jdoe2@poea.gov.ph',
+            'email' => 'jdoe2@dmw.gov.ph',
             'password' => Hash::make('password'),
             'role' => 'user',
             'email_verified_at' => Carbon::now()
@@ -62,7 +62,7 @@ class COOPDBSeeder extends Seeder
 
         User::create([
             'name' => 'Test1 Doe',
-            'email' => 'test1@poea.gov.ph',
+            'email' => 'test1@dmw.gov.ph',
             'password' => Hash::make('password'),
             'role' => 'user',
             'email_verified_at' => Carbon::now()
@@ -70,7 +70,7 @@ class COOPDBSeeder extends Seeder
 
         User::create([
             'name' => 'Test2 Doe',
-            'email' => 'test2@poea.gov.ph',
+            'email' => 'test2@dmw.gov.ph',
             'password' => Hash::make('password'),
             'role' => 'user',
             'email_verified_at' => Carbon::now()
@@ -78,7 +78,7 @@ class COOPDBSeeder extends Seeder
 
         User::create([
             'name' => 'Test3 Doe',
-            'email' => 'test3@poea.gov.ph',
+            'email' => 'test3@dmw.gov.ph',
             'password' => Hash::make('password'),
             'role' => 'user',
             'email_verified_at' => Carbon::now()
